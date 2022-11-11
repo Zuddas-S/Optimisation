@@ -1,0 +1,49 @@
+%% Format
+clc 
+clear
+
+format long
+set(0,'defaultAxesFontSize', 24);
+%% User Input
+
+x0 = [5; 5];% input("Input column/row vector: ");
+
+% Error handling
+if width(x0)==2 && length(x0)==1
+    x0 = x0';
+elseif width(x0)==1 && length(x0)==1
+    fprintf('You have inputted a smaller vector than expected, rerun the program');
+    return;
+elseif width(x0)>2 || length(x0)>2
+    fprintf('You have inputted a larger vector than expected, rerun the program');
+    return;
+end
+
+%% Backtracking Line Search With Armijo Rule
+
+n=2;          %  the number of variables;
+              %  the initial point x0 = [0;0];
+
+% Armijo stepsize rule parameters
+tau  = 0.5; %select 
+epsilon = 1.0e-004; %stopping critereon
+beta = 0.4;
+
+obj = rosenbrock(x0);
+g = rosenbrock_grad(x0);
+
+[x, A, Iterate]= newton_armijo(x0, tau, beta, obj, g, epsilon);
+
+xf = [x0';x];
+
+
+figure;
+plot(xf(:,1),xf(:,2),'-o'); grid;
+title('FILL IN');
+xlabel('x_1'),ylabel('x_2'),
+
+figure;
+plot(Iterate, A, '-'); grid;
+xlabel("Iterations k: %d", height(Iterate)),ylabel("Step Size \alpha");
+
+
