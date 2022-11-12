@@ -22,12 +22,13 @@ function [Solution, A, Iterate]= steepest_backtracking(x,tao,obj,g, epsilon)
                 newobj = rosenbrock(x + a*d);
          end
    
-         if (mod(k,100)==1)
-%              fprintf('Number of iteration is: %10u\n',k);
-               plot(x(1),x(2),'ro','LineWidth',15); grid,
+        if (mod(k,100)==1)
+               plot(x(1), x(2), 'ro', 'LineWidth', 15); grid,
                title(['Iteration = ',num2str(k)]);
-               xlabel('x_1','FontSize',28),ylabel('x_2','FontSize',28),
-               pause(0.1);
+               xlabel(['x_1 = ', num2str(x(1)), " \alpha = ", num2str(a)]);
+               ylabel(['x_2 = ', num2str(x(2))]);
+               
+               pause(0.001);
          end
          x = x + a*d;
          obj = newobj;
@@ -37,6 +38,11 @@ function [Solution, A, Iterate]= steepest_backtracking(x,tao,obj,g, epsilon)
          Solution(k,:)= x;
          Iterate(k) = k;
          k = k + 1;
+         %output
+         fprintf('Number of iteration is: %u\n ',k);
+         fprintf('Value of alpha is: %u\n  ',a);
+         fprintf('Function Value f(x1, x2)= %u\n', rosenbrock(x));
+         
   end
 % Iteration end  
 A = A';

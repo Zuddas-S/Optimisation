@@ -14,9 +14,8 @@ elseif width(x0)>2 || height(x0)>2
     fprintf('You have inputted a larger vector than expected, rerun the program');
     return;
 end
-%to include optimality tolerance
 %, 'OptimalityTolerance', 1.0e-004
-options = optimoptions(@fminunc,'Display','iter', 'PlotFcn', 'optimplotfirstorderopt');
+options = optimoptions(@fminunc,'Display','iter', 'PlotFcn', 'optimplotfval');
 
 [xy_opt,fval, exitflag, output] = fminunc(fun,x0,options)
 

@@ -7,7 +7,7 @@ clc,
 clear,
 
 n=2;          %  the number of variables;
-x0 = [2,-2]';  %  the initial point x0 = [0;0];
+x0 = [5, 5]';  %  the initial point x0 = [0;0];
 
 % Armijo stepsize rule parameters
   tao  = 0.5;
@@ -19,8 +19,13 @@ x0 = [2,-2]';  %  the initial point x0 = [0;0];
   [x, A, Iterate]= steepest_backtracking(x0, tao, obj, g, epsilon);
   
   xf = [x0';x];
-  
-  pause,
  
-  figure,
-  plot(xf(:,1),xf(:,2),'-o'); grid;
+figure;
+plot(xf(:,1),xf(:,2),'-o'); grid;
+title('x_1, x_2 values During Optimisation');
+xlabel('x_1'),ylabel('x_2'),
+
+figure;
+plot(Iterate, A, '-'); grid;
+title('Changes in \alpha During Optimisation');
+xlabel(["Iterations k: ", height(Iterate)]),ylabel("Step Size \alpha");

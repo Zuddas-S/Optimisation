@@ -23,7 +23,7 @@ end
 %% Backtracking Line Search With Armijo Rule
 
 set(0,'defaultAxesFontSize', 24);
-set(gcf, 'position', [0, 0, 1920, 1080]);
+%set(gcf, 'position', [0, 0, 1920, 1080]);
 
 n=2;          %  the number of variables;
               %  the initial point x0 = [0;0];
@@ -36,19 +36,33 @@ beta = 0.4; % select beta
 obj = rosenbrock(x0);
 g = rosenbrock_grad(x0);
 
-[fcn_out, x, A, Iterate]= newton_armijo(x0, tau, beta, obj, g, epsilon);
 
-xf = [x0';x];
 
+%% Backtracking-Armijo
+
+% [fcn_out, x, A, Iterate]= backtrack_armijo(x0, tau, beta, obj, g, epsilon);
+% xf = [x0';x];
+% figure;
+% plot(xf(:,1),xf(:,2),'-o'); grid;
+% title('x_1, x_2 values During Optimisation');
+% xlabel('x_1'),ylabel('x_2'),
+% 
+% figure;
+% plot(Iterate, A, '-'); grid;
+% title('Changes in \alpha During Optimisation');
+% xlabel(["Iterations k: ", height(Iterate)]),ylabel("Step Size \alpha");
+
+%% Newton-Armijo
+% 
+[fcn_out2, x2, A2, Iterate2]= newton_armijo(x0, tau, beta, obj, g, epsilon);
+xf2 = [x0';x2];
 
 figure;
-plot(xf(:,1),xf(:,2),'-o'); grid;
-title('FILL IN');
+plot(xf2(:,1),xf2(:,2),'-o'); grid;
+title('x_1, x_2 values During Optimisation');
 xlabel('x_1'),ylabel('x_2'),
 
 figure;
-plot(Iterate, A, '-'); grid;
-title('FILL IN');
-xlabel(["Iterations k: ", height(Iterate)]),ylabel("Step Size \alpha");
-
-
+plot(Iterate2, A2, '-'); grid;
+title('Changes in \alpha During Optimisation');
+xlabel(["Iterations k: ", height(Iterate2)]),ylabel("Step Size \alpha");
